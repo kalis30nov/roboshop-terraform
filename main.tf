@@ -13,9 +13,9 @@ resource "aws_spot_instance_request" "instance" {
 
 resource "aws_ec2_tag" "example" {
   for_each               = var.components
-  resource_id = aws_spot_instance_request.instance[each.value["name"]].spot_instance_id
-  key         = "Name"
-  value       = each.value["name"]
+  resource_id            = aws_spot_instance_request.instance[each.value["name"]].spot_instance_id
+  key                    = "Name"
+  value                  = each.value["name"]
 }
 
 resource "aws_route53_record" "dnsroute" {
