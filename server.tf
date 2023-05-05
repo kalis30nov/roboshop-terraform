@@ -8,8 +8,27 @@ resource "aws_spot_instance_request" "instance" {
   vpc_security_group_ids = [data.aws_security_group.allow-all.id]
   tags = {
     Name = each.value["name"]
+         }
   }
-}
+
+provisioner "remote-exec" {
+
+  connection {
+    type     = "ssh"
+    user     = "centos"
+    password = DevOps321
+    host     = self.private_ip
+  }
+
+  inline = [
+    "rm -rf roboshop-shell",
+    "git clone https://github.com/kalis30nov/roboshop-shell.git"
+    "roboshop-shell",
+    "sudo bash ${each.value["name"]}.sh"
+    ]
+    
+  }
+
 
 resource "aws_ec2_tag" "example" {
   for_each               = var.components
@@ -26,7 +45,6 @@ resource "aws_route53_record" "dnsroute" {
   ttl      = "300"
   records  = [aws_spot_instance_request.instance[each.value["name"]].private_ip]
 }
-
 
 
 
