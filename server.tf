@@ -15,7 +15,7 @@ resource "null_resource" "provisioner" {
   depends_on = [aws_spot_instance_request.instance, aws_route53_record.dnsroute, aws_ec2_tag.tag]
   for_each   = var.components
   provisioner "remote-exec" {
-    
+
     connection {
       type     = "ssh"
       user     = "centos"
@@ -26,7 +26,7 @@ resource "null_resource" "provisioner" {
     inline = [
       "rm -rf roboshop-shell",
       "git clone https://github.com/kalis30nov/roboshop-shell.git",
-      "roboshop-shell",
+      "cd roboshop-shell",
       "sudo bash ${each.value["name"]}.sh"
       ]
   }
