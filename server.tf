@@ -12,7 +12,7 @@ resource "aws_spot_instance_request" "instance" {
   }
 
 resource "null_resource" "provisioner" {
-  depends_on = [aws_spot_instance_request.instance, aws_route53_recorddnsroute, aws_ec2_tag.tag]
+  depends_on = [aws_spot_instance_request.instance, aws_route53_record.dnsroute, aws_ec2_tag.tag]
   provisioner "remote-exec" {
 
     connection {
