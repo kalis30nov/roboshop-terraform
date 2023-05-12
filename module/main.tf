@@ -1,6 +1,5 @@
 
 resource "aws_spot_instance_request" "instance" { 
-  for_each               = var.components
   availability_zone      = "us-east-1a"
   wait_for_fulfillment   = true
   ami                    = data.aws_ami.centos.image_id
