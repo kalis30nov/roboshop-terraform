@@ -1,4 +1,3 @@
-
 resource "aws_spot_instance_request" "instance" { 
   availability_zone      = "us-east-1a"
   wait_for_fulfillment   = true
