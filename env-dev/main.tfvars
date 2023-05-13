@@ -4,6 +4,12 @@ component = {
     instance_type = "t3.small"
   }
 
+   mysql = {
+    name          = "mysql"
+    instance_type = "t3.small"
+    password      = "RoboShop@1"
+  }
+
     mongodb = {
     name          = "mongodb"
     instance_type = "t3.small"
@@ -29,11 +35,7 @@ component = {
     instance_type = "t3.micro"
   }
 
-  mysql = {
-    name          = "mysql"
-    instance_type = "t3.small"
-    password      = "RoboShop@1"
-  }
+ 
 
   shipping = {
     name          = "shipping"
