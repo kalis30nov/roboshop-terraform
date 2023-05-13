@@ -1,16 +1,16 @@
 component = {
-    frontend = {
+  frontend = {
     name          = "frontend"
     instance_type = "t3.small"
   }
 
-   mysql = {
+  mysql = {
     name          = "mysql"
     instance_type = "t3.small"
     password      = "RoboShop@1"
   }
 
-    mongodb = {
+  mongodb = {
     name          = "mongodb"
     instance_type = "t3.small"
   }
@@ -34,8 +34,6 @@ component = {
     name          = "cart"
     instance_type = "t3.micro"
   }
-
- 
 
   shipping = {
     name          = "shipping"
