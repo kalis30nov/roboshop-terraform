@@ -1,3 +1,5 @@
+env = "dev"
+
 app_servers = {
   frontend = {
     name          = "frontend"
@@ -55,5 +57,3 @@ database_servers = {
     instance_type = "t3.small"
   }
 }
-
-env = "dev"
