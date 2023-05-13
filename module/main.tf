@@ -26,7 +26,7 @@ resource "null_resource" "provisioner" {
       "rm -rf roboshop-shell",
       "git clone https://github.com/kalis30nov/roboshop-shell.git",
       "cd roboshop-shell",
-      "sudo bash ${var.component_name}.sh ${(var.component_password)}"
+      "sudo bash ${var.component_name}.sh ${var.component_password}"
       ]
   }
 }
@@ -39,7 +39,6 @@ resource "aws_ec2_tag" "tag" {
 }
 
 resource "aws_route53_record" "dnsroute" {
-  for_each = var.components
   zone_id = data.aws_route53_zone.main.zone_id
   name     = "${var.component_name}-dev.kalis30nov.online"
   type     = "A"
