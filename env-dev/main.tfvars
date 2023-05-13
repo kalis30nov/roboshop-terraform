@@ -4,6 +4,11 @@ component = {
     instance_type = "t3.small"
   }
 
+    mongodb = {
+    name          = "mongodb"
+    instance_type = "t3.small"
+  }
+
   catalogue = {
     name          = "catalogue"
     instance_type = "t3.micro"
@@ -41,10 +46,6 @@ component = {
   }
   redis = {
     name          = "redis"
-    instance_type = "t3.small"
-  }
-  mongodb = {
-    name          = "mongodb"
     instance_type = "t3.small"
   }
 }
