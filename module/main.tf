@@ -11,7 +11,6 @@ resource "aws_spot_instance_request" "instance" {
   }
 
 resource "null_resource" "provisioner" {
-  count =  var.provisioner ? 1 : 0
   depends_on = [aws_spot_instance_request.instance, aws_route53_record.dnsroute, aws_ec2_tag.tag]
 
   provisioner "remote-exec" {
@@ -23,12 +22,7 @@ resource "null_resource" "provisioner" {
       host     = aws_spot_instance_request.instance.private_ip
     }
 
-    inline = [
-      "rm -rf roboshop-shell",
-      "git clone https://github.com/kalis30nov/roboshop-shell.git",
-      "cd roboshop-shell",
-      "sudo bash ${var.component_name}.sh ${var.component_password}"
-      ]
+    inline = var.app_type == 'db' ? local.db_commands : local.app_commands
   }
 }
 

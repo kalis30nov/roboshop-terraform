@@ -5,5 +5,6 @@ variable "component_password" {}
 variable "provisioner" {
   default = false
 }
+variable "app_type" {
 
 
