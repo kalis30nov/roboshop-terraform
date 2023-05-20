@@ -63,3 +63,34 @@ resource "aws_iam_role" "role" {
     tag-key = "${var.component_name}-${var.env}-role"
   }
 }
+
+resource "aws_iam_instance_profile" "instance_profile" {
+  name = "${var.component_name}-${var.env}-role"
+  role = aws_iam_role.role.name
+}
+
+resource "aws_iam_role_policy" "ssm_policy" {
+  name = "${var.component_name}-${var.env}-ssm-ps-policy"
+  role = aws_iam_role.test_role.id
+
+  policy = jsonencode({
+    "Version" : "2012-10-17",
+    "Statement" : [
+      {
+        "Sid" : "VisualEditor0",
+        "Effect" : "Allow",
+        "Action" : [
+          "kms:Decrypt",
+          "ssm:GetParameterHistory",
+          "ssm:GetParametersByPath",
+          "ssm:GetParameters",
+          "ssm:GetParameter"
+        ],
+        "Resource" : [
+          "arn:aws:kms:us-east-1:633788536644:key/dce90622-5a23-4f82-a639-be841f534702",
+          "arn:aws:ssm:us-east-1:633788536644:parameter/${var.env}.${var.component_name}.*"
+        ]
+      }
+    ]
+  })
+}
