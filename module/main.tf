@@ -14,7 +14,7 @@ resource "aws_spot_instance_request" "instance" {
 resource "null_resource" "provisioner" {
   depends_on = [aws_spot_instance_request.instance, aws_route53_record.dnsroute, aws_ec2_tag.tag]
   triggers = {
-    private_ip = aws_spot_instance_request.instance.pr
+    private_ip = aws_spot_instance_request.instance.private_ip
   }
 
   provisioner "remote-exec" {
