@@ -5,6 +5,7 @@ resource "aws_spot_instance_request" "instance" {
   ami                    = data.aws_ami.centos.image_id
   instance_type          = var.instance_type
   vpc_security_group_ids = [data.aws_security_group.allow-all.id]
+  iam_instance_profile   = aws_iam_instance_profile.instance_profile.name
   tags = {
     Name = local.name
          }
@@ -13,7 +14,7 @@ resource "aws_spot_instance_request" "instance" {
 resource "null_resource" "provisioner" {
   depends_on = [aws_spot_instance_request.instance, aws_route53_record.dnsroute, aws_ec2_tag.tag]
   triggers = {
-    private_ip = aws_spot_instance_request.instance.private_ip
+    private_ip = aws_spot_instance_request.instance.pr
   }
 
   provisioner "remote-exec" {
@@ -91,7 +92,7 @@ resource "aws_iam_role_policy" "ssm-ps-policy" {
         ],
         "Resource" : [
           "arn:aws:kms:us-east-1:714769180788:key/a977a2e7-5100-41ff-aa73-9d83f1a4ebee",
-          "arn:aws:ssm:us-east-1:714769180788:parameter/${var.component_name}.*"
+          "arn:aws:ssm:us-east-1:714769180788:parameter/${var.env}.${var.component_name}.*"
         ]
       }
     ]
