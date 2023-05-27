@@ -7,3 +7,7 @@ module "vpc" {
   env = var.env
   subnets = each.value["subnets"]
 }
+
+output "vpc" {
+  value = modue.vpc
+}
