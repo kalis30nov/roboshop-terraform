@@ -9,5 +9,5 @@ module "vpc" {
 }
 
 output "vpc" {
-  value = modue.vpc
+  value = module.vpc
 }
