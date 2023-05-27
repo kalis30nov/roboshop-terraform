@@ -8,7 +8,7 @@ module "vpc" {
   subnets = each.value["subnets"]
 }
 
-module "web" {
+module "app" {
   source = "git::https://github.com/kalis30nov/roboshop-tf-app.git"
 
   for_each = var.app
