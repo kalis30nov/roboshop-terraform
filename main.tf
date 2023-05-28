@@ -14,5 +14,5 @@ module "app" {
 
   for_each = var.app
   instance_type = each.value["instance_type"]
-  subnet_id     = element(lookup(lookup(lookup(lookup(module.vpc, "main", null), "subnet", null), each.value["subnet_name"], null), "subnet_id", null), 0)
+  subnet_id     = lookup(lookup(lookup(lookup(module.vpc, "main", null), "subnet", null), each.value["subnet_name"], null), "subnet_ids", null)
 }
