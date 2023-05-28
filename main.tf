@@ -24,7 +24,7 @@ module "app" {
 
   subnet_ids    = element(lookup(lookup(lookup(lookup(module.vpc, "main", null), "subnet", null), each.value["subnet_name"], null), "subnet_ids", null),0)
   vpc_id = lookup(lookup(module.vpc, "main", null), "vpc_id", null)
-  allow_app_cidr = lookup(lookup(lookup(lookup(module.vpc, "main", null), "subnet", null), each.value["allow_app_cidr"], null), "subnet_cidrs", nul)
+  allow_app_cidr = lookup(lookup(lookup(lookup(module.vpc, "main", null), "subnet", null), each.value["allow_app_cidr"], null), "subnet_cidrs", null)
 }
 
 
