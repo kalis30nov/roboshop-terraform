@@ -8,3 +8,11 @@ module "vpc" {
   subnets = each.value["subnets"]
 }
 
+
+module "app" {
+  source = "git::https://github.com/kalis30nov/roboshop-tf-app.git"
+
+  for_each = var.app
+  instance_type = each.value["instance_type"]
+  subnet_id     = element(lookup(lookup(lookup(lookup(module.vpc, "main", null), "subnet", null), each.value["subnet_name"], null), "subnet_id", null), 0)
+}
