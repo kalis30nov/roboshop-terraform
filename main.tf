@@ -38,7 +38,7 @@ module "doc_db" {
   for_each = var.doc_db
   env = var.env
   tags = local.tags
-  subnet_ids    = lookup(lookup(lookup(lookup(module.vpc, "main", null), "subnet", null), each.value["subnet_name"], null), "subnet_ids", null)
+  subnets    = lookup(lookup(lookup(lookup(module.vpc, "main", null), "subnet", null), each.value["subnet_name"], null), "subnet_ids", null)
   vpc_id = local.vpc_id
   allow_db_cidr = lookup(lookup(lookup(lookup(module.vpc, "main", null), "subnet", null), each.value["allow_db_cidr"], null), "subnet_cidrs", null)
   kms_arn = var.kms_arn
