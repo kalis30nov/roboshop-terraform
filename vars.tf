@@ -7,5 +7,7 @@ variable "default_vpc_cidr" {}
 variable "default_vpc_rtid" {}
 
 
+variable "doc_db" {}
 
+variable "kms_arn" {}
 
